@@ -27,7 +27,7 @@ async def manifest(request: Request, settings=Depends(get_settings)):
     manifest["configurationUrl"] = request.url_for("configuration-form")
     manifest["extensions"] = [
         {
-            "label": "Test1",
+            "label": "Create with Plugin #1",
             "view": "PRODUCT",
             "type": "OVERVIEW",
             "target": "CREATE",
@@ -37,10 +37,50 @@ async def manifest(request: Request, settings=Depends(get_settings)):
             "url": request.url_for("configuration-form"),
         },
         {
-            "label": "Test2",
+            "label": "Create with Plugin #2",
             "view": "PRODUCT",
             "type": "OVERVIEW",
             "target": "CREATE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Product list plugin #1",
+            "view": "PRODUCT",
+            "type": "OVERVIEW",
+            "target": "MORE_ACTIONS",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Product list plugin #2",
+            "view": "PRODUCT",
+            "type": "OVERVIEW",
+            "target": "MORE_ACTIONS",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Product details plugin #1",
+            "view": "PRODUCT",
+            "type": "DETAILS",
+            "target": "MORE_ACTIONS",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Product details plugin #2",
+            "view": "PRODUCT",
+            "type": "DETAILS",
+            "target": "MORE_ACTIONS",
             "permissions": [
                 "MANAGE_PRODUCTS",
             ],
