@@ -4,7 +4,6 @@ from fastapi import Request
 from fastapi.exceptions import HTTPException
 from fastapi.param_functions import Depends
 from fastapi.templating import Jinja2Templates
-
 from saleor_app.deps import (
     ConfigurationFormDeps,
     get_settings,
@@ -28,9 +27,7 @@ async def manifest(request: Request, settings=Depends(get_settings)):
     manifest["extensions"] = [
         {
             "label": "Create with Plugin #1",
-            "view": "PRODUCT",
-            "type": "OVERVIEW",
-            "target": "CREATE",
+            "mount": "PRODUCT_OVERVIEW_CREATE",
             "permissions": [
                 "MANAGE_PRODUCTS",
             ],
@@ -38,19 +35,24 @@ async def manifest(request: Request, settings=Depends(get_settings)):
         },
         {
             "label": "Create with Plugin #2",
-            "view": "PRODUCT",
-            "type": "OVERVIEW",
-            "target": "CREATE",
+            "mount": "PRODUCT_OVERVIEW_CREATE",
             "permissions": [
                 "MANAGE_PRODUCTS",
             ],
             "url": request.url_for("configuration-form"),
         },
         {
+            "label": "Create with Plugin #3 - app page",
+            "mount": "PRODUCT_OVERVIEW_CREATE",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
             "label": "Product list plugin #1",
-            "view": "PRODUCT",
-            "type": "OVERVIEW",
-            "target": "MORE_ACTIONS",
+            "mount": "PRODUCT_OVERVIEW_MORE_ACTIONS",
             "permissions": [
                 "MANAGE_PRODUCTS",
             ],
@@ -58,19 +60,24 @@ async def manifest(request: Request, settings=Depends(get_settings)):
         },
         {
             "label": "Product list plugin #2",
-            "view": "PRODUCT",
-            "type": "OVERVIEW",
-            "target": "MORE_ACTIONS",
+            "mount": "PRODUCT_OVERVIEW_MORE_ACTIONS",
             "permissions": [
                 "MANAGE_PRODUCTS",
             ],
             "url": request.url_for("configuration-form"),
         },
         {
+            "label": "Product list plugin #3 - app page",
+            "mount": "PRODUCT_OVERVIEW_MORE_ACTIONS",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
             "label": "Product details plugin #1",
-            "view": "PRODUCT",
-            "type": "DETAILS",
-            "target": "MORE_ACTIONS",
+            "mount": "PRODUCT_DETAILS_MORE_ACTIONS",
             "permissions": [
                 "MANAGE_PRODUCTS",
             ],
@@ -78,13 +85,122 @@ async def manifest(request: Request, settings=Depends(get_settings)):
         },
         {
             "label": "Product details plugin #2",
-            "view": "PRODUCT",
-            "type": "DETAILS",
-            "target": "MORE_ACTIONS",
+            "mount": "PRODUCT_DETAILS_MORE_ACTIONS",
             "permissions": [
                 "MANAGE_PRODUCTS",
             ],
             "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Product details plugin #3 - app page",
+            "mount": "PRODUCT_DETAILS_MORE_ACTIONS",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
+            "label": "Catalog navi #1",
+            "mount": "NAVIGATION_CATALOG",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Catalog navi #2 - app_page",
+            "mount": "NAVIGATION_CATALOG",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
+            "label": "Orders navi #1",
+            "mount": "NAVIGATION_ORDERS",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Orders navi #2 - app_page",
+            "mount": "NAVIGATION_ORDERS",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
+            "label": "Customers navi #1",
+            "mount": "NAVIGATION_CUSTOMERS",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Customers navi #2 - app_page",
+            "mount": "NAVIGATION_CUSTOMERS",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
+            "label": "Discounts navi #1",
+            "mount": "NAVIGATION_DISCOUNTS",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Discounts navi #2 - app_page",
+            "mount": "NAVIGATION_DISCOUNTS",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
+            "label": "Translations navi #1",
+            "mount": "NAVIGATION_TRANSLATIONS",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Translations navi #2 - app_page",
+            "mount": "NAVIGATION_TRANSLATIONS",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
+        },
+        {
+            "label": "Pages navi #1",
+            "mount": "NAVIGATION_PAGES",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": request.url_for("configuration-form"),
+        },
+        {
+            "label": "Pages navi #2 - app_page",
+            "mount": "NAVIGATION_PAGES",
+            "target": "APP_PAGE",
+            "permissions": [
+                "MANAGE_PRODUCTS",
+            ],
+            "url": "/configuration/",
         },
     ]
     return Manifest(**manifest)
